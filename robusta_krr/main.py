@@ -192,6 +192,13 @@ def load_commands() -> None:
                     help="Adds the token needed to query Coralogix managed prometheus.",
                     rich_help_panel="Prometheus Coralogix Settings",
                 ),
+                datadog: bool = typer.Option(
+                    False,
+                    "--datadog",
+                    help="Use DataDog API as metrics source.",
+                    rich_help_panel="DataDog Settings",
+                    hidden=True,
+                ),
                 openshift: bool = typer.Option(
                     False,
                     "--openshift",
