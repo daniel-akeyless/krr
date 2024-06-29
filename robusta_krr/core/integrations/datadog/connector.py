@@ -53,7 +53,7 @@ class DataDogConnector:
                             [
                                 MetricsTimeseriesQuery(
                                     data_source=MetricsDataSource.METRICS,
-                                    query="avg:kubernetes.cpu.requests{*}",
+                                    query=metric,
                                 ),
                             ]
                         ),
