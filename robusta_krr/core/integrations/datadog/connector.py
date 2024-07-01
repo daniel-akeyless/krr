@@ -8,8 +8,8 @@ from typing import TYPE_CHECKING, Optional
 from robusta_krr.core.models.config import settings
 from robusta_krr.core.models.objects import K8sWorkload, PodData
 from datadog_api_client import Configuration
-from datadog_api_client.v2 import ApiClient
-from .datadog_utils import DataDogEnvVarsUsedAsCredentialsNotFound, DataDogRequiredMetricsNotAccessibleByAuthenticatedUser
+from datadog_api_client.v2 import ApiClient, ApiException
+from .datadog_utils import DataDogEnvVarsUsedAsCredentialsNotFound, DataDogUsedMetricsNotAccessibleByAuthenticatedUser
 
 if TYPE_CHECKING:
     from robusta_krr.core.abstract.strategies import BaseStrategy, MetricsPodData
@@ -64,5 +64,5 @@ class DataDogConnector:
                 )
                 try:
                     response = metrics_api.query_timeseries_data(body=body)
-                except ApiException as e:
-                    raise DataDogRequiredMetricsNotAccessibleByAuthenticatedUser
+                except ApiException:
+                    raise DataDogUsedMetricsNotAccessibleByAuthenticatedUser

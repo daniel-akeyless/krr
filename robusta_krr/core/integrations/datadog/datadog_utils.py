@@ -1,4 +1,9 @@
 from __future__ import annotations
+from pydantic import BaseModel, SecretStr
+from typing import Dict, List, Optional, Required
+from datadog_api_client.v2.api import metrics_api
+from datadog_api_client.v2 import ApiClient, ThreadedApiClient
+from datadog_api_client import Configuration as DataDogConfiguration
 
 class DataDogEnvVarsUsedAsCredentialsNotFound(Exception):
     """
@@ -7,9 +12,9 @@ class DataDogEnvVarsUsedAsCredentialsNotFound(Exception):
 
     pass
 
-class DataDogRequiredMetricsNotAccessibleByAuthenticatedUser(Exception):
+class DataDogUsedMetricsNotAccessibleByAuthenticatedUser(Exception):
     """
-    An exception raised when the DataDog required metrics: 'avg:kubernetes.cpu.requests{*}' and 'avg:container.cpu.usage{*}' are not accessible by the authenticated user.
+    An exception raised when the DataDog used metrics are not accessible by the authenticated user.
     """
 
     pass
